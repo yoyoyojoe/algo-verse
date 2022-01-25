@@ -2,26 +2,28 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
-const apiRouters = require('./routers/api')
+// const apiRouters = require('./routers/api')
 
-const algoVerseController = require('./controllers/algoVerseController');
+// const algoVerseController = require('./controllers/algoVerseController');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', (req, res) => {
+    return res.sendFile(path.join(__dirname, '../index.html'));
+})
+
+
+// app.use('/api/', apiRouters);
 
 
 
-
-app.use('/api/', apiRouters);
-
-
-
-app.post('/login', failForwardController.login, (req, res) => {
-    return res.status(200).send(res.locals.authen);
-});
+// app.post('/login', failForwardController.login, (req, res) => {
+//     return res.status(200).send(res.locals.authen);
+// });
 
 
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
@@ -42,7 +44,7 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on port: ${PORT}`)
+    console.log(`Server is listening on port: http://localhost:${PORT}/`)
 });
 
 
