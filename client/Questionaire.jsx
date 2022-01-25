@@ -1,5 +1,4 @@
-import { STATEMENT_OR_BLOCK_KEYS } from '@babel/types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Questionaire = (props) => {
 
@@ -47,28 +46,30 @@ const Questionaire = (props) => {
   return (
     <div>
       <div className="Num-diff-display">
-        <p>Question#: {count}</p>
-        <p>Difficulty: {state.difficulty}</p>
+        <p>Question#: </p>
+        <p>Difficulty: </p>
       </div>
-      <p className="question">{state[i].question}</p>
-      <p className="questionAnswer">{state[i].answer}</p>
+      <p className="question"></p>
+      <p className="questionAnswer"></p>
       <p className="instructions">
         this is how you answer the question: ...
       </p>
       <input
       className="timeInput"
       placeholder="what is your time answer?"
-      onChange={(e) => (timeMessage = e.target.value)}
-      value={submission}>
+      // onChange={(e) => (timeMessage = e.target.value)}
+      // value={submission}
+      >
       </input>
       <input
       className="spaceInput"
       placeholder="what is your space answer?"
       onChange={(e) => (spaceMessage = e.target.value)}
-      value={submission}>
+      // value={submission}
+      >
       </input>
-      <div className="answerbox">Your Answer is... {answer}</div>
-      <button onClick ={()=> handleAnswer(submission)}>SUBMIT</button>
+      <div className="answerbox">Your Answer is... </div>
+      <button >SUBMIT</button>
     </div>
   )
 };

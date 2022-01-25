@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles.scss';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Questionaire from './Questionaire.jsx';
 import Leaderboard from './Leaderboard.jsx';
