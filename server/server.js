@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
-// const apiRouters = require('./routers/api')
+const apiRouters = require('./routers/api')
 
 // const algoVerseController = require('./controllers/algoVerseController');
 
@@ -13,14 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/build", express.static(path.resolve(__dirname, "../build")));
 
 app.get('/', (req, res) => {
-    return res.sendFile(path.join(__dirname, '../index.html'));
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 })
 
 app.get("/bundle.js", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../build/bundle.js"));
   });
 
-// app.use('/api/', apiRouters);
+app.use('/api/', apiRouters);
 
 
 
