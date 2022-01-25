@@ -13,10 +13,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?/,
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
-                use: ['babel-loader'],
-            },
+                use: {
+                  loader: 'babel-loader',
+                  options: {
+                    presets: ['@babel/preset-env', '@babel/preset-react'],
+                  },
+                },
+              },
             {
                 test: /\.(png|jpg|gif)$/i,
                 use:[{
@@ -27,14 +32,16 @@ module.exports = {
                 }]
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [ 
-                    MiniCssExtractPlugin.loader,
-                    // "style-loader", // this is only used if we don't use the css plugin
-                    "css-loader",
-                    "sass-loader",
-                ]
-            },
+                test: /\.s?[ac]ss$/i,
+                exclude: /node_modules/,
+                use: [
+                  process.env.NODE_ENV === 'production'
+                    ? MiniCssExtractPlugin.loader
+                    : 'style-loader',
+                  'css-loader',
+                  'sass-loader',
+                ],
+              },
         ],
     },
     devServer: {
