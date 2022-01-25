@@ -5,7 +5,8 @@ const Questionaire = (props) => {
 
   function handleAnswer() {
     const newAnswer = {
-      message,
+      timeMessage: timeMessage,
+      spaceMessage: spaceMessage,
     }
     fetch('/checksubmission', {
         method: "POST",
@@ -55,9 +56,15 @@ const Questionaire = (props) => {
         this is how you answer the question: ...
       </p>
       <input
-      className="textInput"
-      placeholder="what is your answer?"
-      onChange={(e) => (message = e.target.value)}
+      className="timeInput"
+      placeholder="what is your time answer?"
+      onChange={(e) => (timeMessage = e.target.value)}
+      value={submission}>
+      </input>
+      <input
+      className="spaceInput"
+      placeholder="what is your space answer?"
+      onChange={(e) => (spaceMessage = e.target.value)}
       value={submission}>
       </input>
       <div className="answerbox">Your Answer is... {answer}</div>
