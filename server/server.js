@@ -10,12 +10,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// app.use(express.static(path.join(__dirname, 'build')));
+app.use("/build", express.static(path.resolve(__dirname, "../build")));
 
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 })
 
+app.get("/bundle.js", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../build/bundle.js"));
+  });
 
 app.use('/api/', apiRouters);
 
