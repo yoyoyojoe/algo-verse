@@ -79,7 +79,7 @@ const Questionaire = (props) => {
 
   return (
     <div>
-      <div>
+      <div className="getNewQuestionDiv">
         <button  
           className="getAQuestion"
           onClick={() => {getNewQuestion(score)}}
