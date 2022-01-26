@@ -8,8 +8,7 @@ import Leaderboard from './Leaderboard.jsx';
 const App = () => {
 
   return (
-    <div>
-      <h1>AlgoVerse</h1>
+    <div className='displayBox'>
       <div className='question-section'>
         <Questionaire />
       </div>
