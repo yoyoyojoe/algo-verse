@@ -14,26 +14,22 @@ const appController = {};
 //           res.locals.listings = received.rows;
 //           return next();
 //       })
-// };w
+// };
 
 appController.getNewQuestion = (req, res, next) => {
-  console.log('req.body is', req.body); 
-  console.log('req.body.data is', req.body.data); 
   let { data } = req.body;
-  console.log('score is', data);
   data = data + 3;
-    const values = [ data ];
-    console.log('values are', values);
-    const text = 
-    `SELECT * FROM algorithms
-    WHERE question_id = $1;`;
-    db.query(text, values)
-        .then((received) => {
-          console.log(received.rows);
-          res.locals.algorithm = received.rows;
-          return next();
-        })
-        .catch((err) => next(err));
+  const values = [ data ];
+  const text = 
+  `SELECT * FROM algorithms
+  WHERE question_id = $1;`;
+  db.query(text, values)
+      .then((received) => {
+        console.log(received.rows);
+        res.locals.algorithm = received.rows;
+        return next();
+      })
+      .catch((err) => next(err));
 };
 
 appController.getLeaderBoard = (req, res, next) => {
@@ -48,47 +44,21 @@ appController.getLeaderBoard = (req, res, next) => {
         });
 };
 
-// appController.postScore = (req, res, next) => {
-//   const [ score ] = req.body;
-//   const values = [ score ]
-//   const text = 
-//   `UPDATE users
-//   SET score = $1
-//   WHERE username = 'test2'
-//   `;
-//   db.query(text, values)
-//       .then(received => {
-//         console.log('updated score in database!')
-//         return next();
-//       });
-// };
-
-// algoVerseController.deleteJobListing = (req, res, next) => {
-//     // const params = [ req.body.level, req.body.id ]
-//     // const text = 
-//     // `DELETE FROM public.job_listings 
-//     // WHERE progress = $1 AND _id ='Alfreds Futterkiste';`
-//     // db.query(text)
-//     //     .then(received => next());
-// }
+appController.postScore = (req, res, next) => {
+  const { data } = req.body;
+  const values = [ data ]
+  const text = 
+  `UPDATE users
+  SET score = $1
+  WHERE username = 'test2'
+  `;
+  db.query(text, values)
+      .then(received => {
+        console.log('updated score in database!')
+        return next();
+      });
+};
 
 
-<<<<<<< HEAD
-=======
-// appController.login = (req, res, next) => {
-//     console.log('reached login controller');
-//     // console.log(req.body);
-//     params = [ req.body.username, req.body.password ]
-//     text = 
-//     `SELECT 1
-//     FROM users
-//     WHERE username = $1 AND password = $2;`
-//     db.query(text, params)
-//         .then((receive) => {
-//             res.locals.authen = receive.rows;
-//             return next();
-//         })
-// }
->>>>>>> cbc277af3faa07042663b659c7fee8d3e68cac07
 
 module.exports = appController;
