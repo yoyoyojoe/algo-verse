@@ -9,6 +9,7 @@ const App = () => {
 
   return (
     <div>
+      <h1>AlgoVerse112</h1>
       <div className='question-section'>
         <Questionaire />
       </div>
