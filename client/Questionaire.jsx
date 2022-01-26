@@ -22,7 +22,7 @@ const Questionaire = (props) => {
   })
 
   const postToLeaderboard = ((score) => {
-    axios({ method: 'POST', url: 'http://localhost:3000/toleaderboard', data: score })
+    axios({ method: 'POST', url: 'http://localhost:3000/leaderboard', data: score })
     .then((res) => {
       console.log(res);
     });
