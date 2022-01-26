@@ -20,13 +20,15 @@ loginController.login = (req, res, next) => {
 
 
 loginController.createSession = (req, res, next) => {
-    console.log('creating session');
+  console.log('creating session');
+  // if user in res.locals is authenticated
+  // create new session
 };
 
 loginController.signUp = (req, res, next) => {
   console.log('signing up');
   const [ username, password ] = req.body;
-  const params = [ username, password ];
+  const values = [ username, password ];
   const text = `
   SELECT * FROM users
   WEHERE $1 = $2;

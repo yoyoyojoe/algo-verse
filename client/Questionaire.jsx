@@ -69,7 +69,7 @@ const Questionaire = (props) => {
       >
       </input>
       <div className="answerbox">Your Answer is... </div>
-      <button >SUBMIT</button>
+      <button onClick={() => console.log('hi')}>SUBMIT</button>
     </div>
   )
 };

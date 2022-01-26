@@ -50,23 +50,6 @@ appController.getLeaderBoard = (req, res, next) => {
 //     //     .then(received => next());
 // }
 
-// algoVerseController.updateJobListing = (req, res, next) => {
-    
-// }
 
-appController.login = (req, res, next) => {
-    console.log('reached login controller');
-    // console.log(req.body);
-    params = [ req.body.username, req.body.password ]
-    text = 
-    `SELECT 1
-    FROM users
-    WHERE username = $1 AND password = $2;`
-    db.query(text, params)
-        .then((receive) => {
-            res.locals.authen = receive.rows;
-            return next();
-        })
-}
 
 module.exports = appController;

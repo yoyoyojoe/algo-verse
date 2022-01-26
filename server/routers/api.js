@@ -6,7 +6,7 @@ const appController = require('../controllers/appControllers');
 
 
 router.get('/', (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../../index.html'));
+  return res.status(200).sendFile(path.resolve(__dirname, '../../build/index.html'));
 });
 
 router.get('/getNewQuestion', appController.getNewQuestion, (req, res) => {
