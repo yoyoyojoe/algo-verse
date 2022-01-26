@@ -2,10 +2,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
-const apiRouters = require('./routers/api')
+const apiRouters = require('./routers/api');
+const cors = require('cors');
 
 // const algoVerseController = require('./controllers/algoVerseController');
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

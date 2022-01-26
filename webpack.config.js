@@ -9,7 +9,7 @@ module.exports = {
         path: path.resolve('build'),
         filename: 'bundle.js',
     },
-    plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin({template: './index.html'})],
+    plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin({template: './dev.html'})],
     module: {
         rules: [
             {
@@ -25,7 +25,7 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/i,
                 use:[{
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
                         limit: 8192,
                         },
