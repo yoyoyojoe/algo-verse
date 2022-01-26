@@ -8,7 +8,7 @@ import Leaderboard from './Leaderboard.jsx';
 const App = () => {
 
   return (
-    <div>
+    <div className='displayBox'>
       <div className='question-section'>
         <Questionaire />
       </div>

@@ -36,17 +36,17 @@ appController.getNewQuestion = (req, res, next) => {
         .catch((err) => next(err));
 };
 
-// appController.getLeaderBoard = (req, res, next) => {
-//     const text = 
-//     `SELECT username, score FROM users
-//     ORDER BY score desc;`
-//     db.query(text)
-//         .then((received) => {
-//           console.log('this is from leaderboard', received.rows);
-//           res.locals.leaderboard = received.rows;
-//           return next();
-//         });
-// };
+appController.getLeaderBoard = (req, res, next) => {
+    const text = 
+    `SELECT username, score FROM users
+    ORDER BY score desc;`
+    db.query(text)
+        .then((received) => {
+          console.log('this is from leaderboard', received.rows);
+          res.locals.leaderboard = received.rows;
+          return next();
+        });
+};
 
 // appController.postScore = (req, res, next) => {
 //   const [ score ] = req.body;

@@ -14,9 +14,9 @@ router.post('/getNewQuestion', appController.getNewQuestion, (req, res) => {
   res.status(200).send(res.locals.algorithm);
 });
 
-// router.get('/leaderboard', appController.getLeaderBoard, (req, res) => {
-//   return res.status(200).send(res.locals.leaderboard);
-// });
+router.get('/leaderboard', appController.getLeaderBoard, (req, res) => {
+  return res.status(200).send(res.locals.leaderboard);
+});
 
 // router.post('/postToLeaderboard', appController.postScore, appController.getLeaderBoard, (req, res) => {
 //   console.log('routing to leaderboard');
