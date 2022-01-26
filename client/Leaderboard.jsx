@@ -1,6 +1,12 @@
 import React from 'react';
 
 const Leaderboard = (props) => {
+
+  const [leaders, getLeaderboard] = useState({
+    username: '',
+    score: '',
+  })
+
   return (
     <div>
       <h1>In the Leaderboard</h1>
