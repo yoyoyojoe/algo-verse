@@ -5,31 +5,14 @@ const bcrypt = require('bcryptjs');
 const loginController = {};
 
 loginController.login = (req, res, next) => {
-  console.log('reached login controller');
-  // console.log(req.body);
-  const values = [ req.body.username, req.body.password ]
-  const text = 
-  `SELECT true
-  FROM users
-  WHERE username = $1 AND password = $2;`
-  db.query(text, params)
-      .then((receive) => {
-          res.locals.authen = receive.rows;
-          return next();
-      })
-      .catch((err) => next(err));
-};
-
-
-loginController.verifySession = (req, res, next) => {
   console.log('verifying session');
   const { username, password } = req.body;
   if (!username) return next(new Error("Please input a valid username"));
+  const values = [ username ];
   const text = `
   SELECT * FROM users
   WHERE username = $1;
   `
-  const values = [ username ];
   db.query(text, values)
     .then((response) => {
       if (!response.rows.length) {
@@ -37,6 +20,7 @@ loginController.verifySession = (req, res, next) => {
       } 
       const hash = response.rows[0].password;
       if (bcrypt.compareSync(password, hash)) {
+        res.locals.authen = true;
         return next();
       } else {
         return next(new Error("Password is incorrect"));
@@ -48,7 +32,7 @@ loginController.verifySession = (req, res, next) => {
 
 loginController.createSession = (req, res, next) => {
     console.log('creating session');
-    const [ username ] = req.body;
+    const { username } = req.body;
     const session_id = uuid.v4();
     const values = [ session_id, username ];
     const text = `
@@ -58,9 +42,11 @@ loginController.createSession = (req, res, next) => {
     `
     db.query(text, values)
       .then((response) => {
+        res.locals.session = session_id;
         res.cookie("session_id", session_id, {
           httpOnly: true,
-          secure: true
+          secure: true,
+          maxAge: 900000
         });
         res.cookie("username", username);
         return next();
@@ -70,13 +56,16 @@ loginController.createSession = (req, res, next) => {
 
 loginController.signUp = (req, res, next) => {
   console.log('signing up');
-  const [ username, password ] = req.body;
+  console.log(req.body);
+  const { session } = res.locals
+  const { username, password } = req.body;
+  console.log('this is after deconstruct');
   if (!username || !password) return next(new Error("Please do not leave username or password blank"));
   const hash = bcrypt.hashSync(password, 10);
-  const params = [ username, hash ];
+  const values = [ username, hash, session ];
   const text = `
-  INSERT INTO users (username, password, score)
-  VALUES ($1, $2, '0');
+  INSERT INTO users (username, password, session_id, score)
+  VALUES ($1, $2, $3,'0');
   `
   db.query(text, values)
     .then((response) => {
@@ -85,3 +74,23 @@ loginController.signUp = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
+
+loginController.verifyCookies = (req,res, next) => {
+  const { session_id } = req.cookies;
+  const values = [ session_id ];
+  const text = `
+  SELECT * FROM users
+  WHERE session_id = $1;
+  `
+  db.query(text, values)
+    .then((response) => {
+      console.log('checking if session matches db', response.rows.length)
+      if (response.rows.length) {
+        res.locals.cookies = true;
+      }
+      return next();
+      
+    })
+}
+
+module.exports = loginController;

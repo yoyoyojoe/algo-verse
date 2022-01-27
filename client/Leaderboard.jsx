@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const Leaderboard = (props) => {
@@ -36,16 +35,12 @@ const Leaderboard = (props) => {
     })
   }
 
-
  
-
+  getLeaderboard();
+  
   return (
     <div>
-      <h1>In the Leaderboard</h1>
-      <button
-      className="getLeaders"
-      onClick={() => {getLeaderboard()}}
-      >Get Leaders</button>
+      <h1>Leaderboard</h1>
       <p>Top leaders</p>
       <ol className="leaderboard">
           <li className="rank1">{leaders1} {scores1}</li>
