@@ -4,7 +4,7 @@ const UserCreator = (props) => {
   function send() {
     console.log(document.getElementById("createUsername").value)
     console.log(document.getElementById("createPassword").value)
-    fetch("/api/register", {
+    fetch("/registerUser", {
       method: "POST",
       body: JSON.stringify({
         username: document.getElementById("createUsername").value,
@@ -14,15 +14,11 @@ const UserCreator = (props) => {
     }).then((response) => {
       console.log(response.status)
       if(response.status===200){
-        console.log(response)
+        console.log(response);
         console.log('registration completed')
-        //what happens if dupe username?
-        //otherwise, if we create the user...then what?
-        props.fetchMessages();
         document.getElementById("UserCreator").style.display = "none";
-        // document.getElementById("MessageDisplay").style.display = "block";
       } else{
-        console.log(response)
+        console.log(response);
         document.getElementById("registerfailed").style.display = "block";
       }
     });
@@ -32,9 +28,7 @@ const UserCreator = (props) => {
     document.getElementById("UserLogin").style.display = "block";
   }
   return (
-    <div id="UserCreator" style={{ display: "none" }}>
-
-      <h2>Register please, chatter!</h2>
+    <div className="UserCreator" id="UserCreator" style={{ display: "none" }}>
       <input
         className="textInput"
         id="createUsername"

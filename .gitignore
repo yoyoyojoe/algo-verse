@@ -1,4 +1,7 @@
 node_modules/*
 .DS_Store
-# build/*
+build/*.js
+build/*.html
+build/*.css
+build/*.txt
 .env

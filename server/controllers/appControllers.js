@@ -18,7 +18,7 @@ const appController = {};
 
 appController.getNewQuestion = (req, res, next) => {
   let { data } = req.body;
-  data = data + 3;
+  console.log('this is the score', data);
   const values = [ data ];
   const text = 
   `SELECT * FROM algorithms
@@ -44,20 +44,24 @@ appController.getLeaderBoard = (req, res, next) => {
         });
 };
 
-appController.postScore = (req, res, next) => {
+appController.postLeaderBoard = (req, res, next) => {
   const { data } = req.body;
-  const values = [ data ]
-  const text = 
-  `UPDATE users
+  console.log('this is the cookies from backend', req.cookies);
+  console.log('this is the information posting to leader board', req.body);
+  const { username } = req.cookies;
+  const values = [ data, username ]
+  const text = `
+  UPDATE users
   SET score = $1
-  WHERE username = 'test2'
-  `;
+  WHERE username = $2;
+  `
   db.query(text, values)
-      .then(received => {
-        console.log('updated score in database!')
-        return next();
-      });
-};
+    .then((response) => {
+      console.log('posted to leaderboard');
+      return next();
+    })
+}
+
 
 
 

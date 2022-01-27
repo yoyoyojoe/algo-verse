@@ -4,21 +4,23 @@ const UserLogin = (props) => {
   function send() {
     console.log(document.getElementById("loginUsername").value)
     console.log(document.getElementById("loginPassword").value)
-    fetch("/api/login", {
+    fetch("/login", {
       method: "POST",
       body: JSON.stringify({
         username: document.getElementById("loginUsername").value,
         password: document.getElementById("loginPassword").value,
       }),
       headers: { "Content-Type": "application/json" },
-    }).then((response) => {
+    })
+    .then((response) => {
       if (response.status===200){
-        console.log(response)
-        //what happens if dupe username?
-        //otherwise, if we login the user...then what?
-        props.fetchMessages();
+        if (response.ok === true) {
+          props.verify();
+        } else {
+          document.getElementById("loginfailed").style.display="block";
+        }
+        console.log('display disappears');
         document.getElementById("UserLogin").style.display = "none";
-        document.getElementById("MessageDisplay").style.display = "block";
       } else {
         console.log('login failed');
         document.getElementById("loginfailed").style.display="block";
@@ -31,7 +33,7 @@ function redirectToSignUp(){
   document.getElementById("UserLogin").style.display = "none";
 }
   return (
-    <div id="UserLogin" style={{ display: "block" }}>
+    <div className="UserLogin" >
       <h2>Login</h2>
       <input
         className="textInput"
@@ -43,8 +45,8 @@ function redirectToSignUp(){
         id="loginPassword"
         type="password"
         placeholder="Enter password"
-      ></input><br/>
-      <div id="loginButtons">
+      ></input><br/><br/>
+      <div className="loginButtons">
       <button id="loginButton" className="submitButton" onClick={send}>
         Login
       </button>
