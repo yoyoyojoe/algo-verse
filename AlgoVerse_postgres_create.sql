@@ -8,8 +8,6 @@ CREATE TABLE "users" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "algorithms" (
 	"question_id" serial NOT NULL,
 	"question" varchar(2000) NOT NULL,

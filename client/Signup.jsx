@@ -13,19 +13,19 @@ const UserCreator = (props) => {
       headers: { "Content-Type": "application/json" },
     }).then((response) => {
       console.log(response.status)
-      if(response.status===200){
+      if (response.status === 200) {
         console.log(response);
         console.log('registration completed')
         document.getElementById("UserCreator").style.display = "none";
-      } else{
+      } else {
         console.log(response);
-        document.getElementById("registerfailed").style.display = "block";
+        document.getElementById("registrationFailed").style.display = "block";
       }
     });
   }
-  function redirectLogin(){
+  function redirectLogin() {
     document.getElementById("UserCreator").style.display = "none";
-    document.getElementById("UserLogin").style.display = "block";
+    document.getElementById("UserLogin").style.display = "flex";
   }
   return (
     <div className="UserCreator" id="UserCreator" style={{ display: "none" }}>
@@ -33,13 +33,13 @@ const UserCreator = (props) => {
         className="textInput"
         id="createUsername"
         placeholder="Enter username"
-      ></input><br/>
+      ></input><br />
       <input
         className="textInput"
         id="createPassword"
         type="password"
         placeholder="Enter password"
-      ></input><br/>
+      ></input><br />
       <div id="loginButtons">
         <button className="submitButton" onClick={redirectLogin}>
           Log-in Instead
@@ -48,7 +48,7 @@ const UserCreator = (props) => {
           Register
         </button>
       </div>
-      <p align="center" id="registerfailed" style={{display: "none"}}>Username already exists, pick a different name!</p>
+      <p align="center" id="registerFailed" style={{ display: "none" }}>Username already exists, pick a different name!</p>
     </div>
   );
 };
